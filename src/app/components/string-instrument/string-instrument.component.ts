@@ -86,7 +86,7 @@ export class StringInstrumentComponent implements OnInit {
   // Audio management
   private loadAudioFiles() {
     this.strings.forEach((string) => {
-      string.audio.src = `/sounds/${string.fileName}.mp3`;
+      string.audio.src = `./sounds/${string.fileName}.mp3`;
       string.audio.load();
 
       string.audio.addEventListener('canplaythrough', () => {
