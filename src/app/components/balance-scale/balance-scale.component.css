@@ -1,0 +1,169 @@
+.scale-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #f5f5f5;
+  min-height: 600px;
+}
+
+.weight-display {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.left-weight,
+.right-weight {
+  padding: 10px 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.scale {
+  position: relative;
+  width: 500px;
+  height: 400px;
+  margin: 20px 0;
+}
+
+.scale-beam {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 20px;
+  background: #555;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.5s ease;
+  transform-origin: center;
+  border-radius: 10px;
+}
+
+.scale-beam.left {
+  transform: translateX(-50%) rotate(-10deg);
+}
+
+.scale-beam.right {
+  transform: translateX(-50%) rotate(10deg);
+}
+
+.scale-beam.balanced {
+  transform: translateX(-50%) rotate(0deg);
+}
+
+.scale-pan {
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(145deg, #777, #999);
+  border-radius: 10px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.stones-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 10px;
+  max-width: 140px;
+}
+
+.center-pole {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 200px;
+  background: #555;
+  border-radius: 10px;
+}
+
+.scale-stand {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 200px;
+  background: linear-gradient(90deg, #444, #666, #444);
+  border-radius: 20px;
+}
+
+.stones-palette {
+  display: flex;
+  gap: 15px;
+  margin-top: 60px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 600px;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stone {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.stone:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.stone.selected {
+  opacity: 0.6;
+  transform: scale(0.9);
+}
+
+.reset-button {
+  margin-top: 30px;
+  padding: 12px 24px;
+  font-size: 1.2em;
+  background: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.reset-button:hover {
+  background: #ff6666;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes panTilt {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(var(--tilt-angle));
+  }
+}

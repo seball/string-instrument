@@ -1,0 +1,121 @@
+<div class="instrument-container">
+  <h2>String Instrument</h2>
+  <!-- Mode Selector -->
+  <div class="mode-selector">
+    <button
+      class="mode-btn"
+      [class.active]="mode === 'build'"
+      (click)="setMode('build')"
+    >
+      Sequence Builder
+    </button>
+    <button
+      class="mode-btn"
+      [class.active]="mode === 'practice'"
+      (click)="startPracticeMode()"
+    >
+      Practice Mode
+    </button>
+  </div>
+
+  <!-- Main Instrument -->
+  <div class="koto-instrument">
+    <div class="strings">
+      <div
+        *ngFor="let string of strings; let i = index"
+        class="string"
+        [class.playing]="string.isPlaying"
+        [class.next]="string.isNext"
+        (click)="handleStringClick(i)"
+      >
+        <div class="string-line"></div>
+        <div class="note-label">{{ string.runicSymbol }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Builder Mode UI -->
+  <div *ngIf="mode === 'build'" class="builder-mode">
+    <div class="sequence-display">
+      <div
+        *ngFor="let step of buildSequence; let i = index"
+        class="sequence-step"
+      >
+        <span class="step-notes">{{ getNoteNames(step.noteIndices) }}</span>
+        <button class="remove-btn" (click)="removeStep(i)">×</button>
+      </div>
+    </div>
+
+    <div class="builder-controls">
+      <!-- Note Selection -->
+      <div class="note-selector">
+        <div
+          *ngFor="let string of strings; let i = index"
+          class="note-option"
+          [class.selected]="selectedNotes.includes(i)"
+          (click)="toggleNoteSelection(i)"
+        >
+          {{ string.runicSymbol }}
+        </div>
+      </div>
+
+      <!-- Control Buttons -->
+      <div class="control-buttons">
+        <button
+          class="btn"
+          (click)="addToSequence()"
+          [disabled]="selectedNotes.length === 0"
+        >
+          Add to Sequence
+        </button>
+        <button
+          class="btn"
+          (click)="clearSequence()"
+          [disabled]="buildSequence.length === 0"
+        >
+          Clear
+        </button>
+        <button
+          class="btn"
+          (click)="playBuiltSequence()"
+          [disabled]="buildSequence.length === 0"
+        >
+          Play Sequence
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Practice Mode UI -->
+  <div *ngIf="mode === 'practice'" class="practice-mode">
+    <div class="practice-sequence">
+      <div
+        *ngFor="let note of practiceSequence; let i = index"
+        class="sequence-note"
+        [class.completed]="i < currentStep"
+        [class.current]="i === currentStep"
+      >
+        {{ note }}
+      </div>
+    </div>
+
+    <div class="practice-controls">
+      <div *ngIf="isPlaying" class="practice-progress">
+        Progress: {{ currentStep + 1 }} / {{ practiceSequence.length }}
+      </div>
+      <button
+        class="btn"
+        (click)="isPlaying ? resetState() : startPracticeMode()"
+      >
+        {{ isPlaying ? "Reset Practice" : "Start Practice" }}
+      </button>
+    </div>
+
+    <div *ngIf="isPlaying" class="practice-instructions">
+      <p>
+        Play the highlighted note:
+        <strong>{{ practiceSequence[currentStep] }}</strong>
+      </p>
+    </div>
+  </div>
+</div>

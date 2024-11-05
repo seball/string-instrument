@@ -1,0 +1,56 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-navigation {
+  background: #fff;
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab-button {
+  padding: 12px 24px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 8px;
+  background: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 160px;
+}
+
+.tab-button:hover {
+  background: #d0d0d0;
+}
+
+.tab-button.active {
+  background: #2196f3;
+  color: white;
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+.content-area {
+  flex: 1;
+  position: relative;
+}
+
+.tab-panel {
+  display: none;
+  height: 100%;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* Ensure content fills available space */
+app-string-instrument,
+app-balance-scale {
+  display: block;
+  height: 100%;
+}

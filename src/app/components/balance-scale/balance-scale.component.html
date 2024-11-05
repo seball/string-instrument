@@ -1,0 +1,63 @@
+<div class="scale-container">
+  <div class="weight-display">
+    <div class="left-weight">Left: {{ scaleState.leftWeight }}</div>
+    <div class="right-weight">Right: {{ scaleState.rightWeight }}</div>
+  </div>
+
+  <div class="scale">
+    <div class="scale-beam" [class]="scaleState.tilt">
+      <div class="scale-pan left">
+        <div class="stones-container">
+          <ng-container *ngFor="let stone of stones">
+            <div
+              class="stone"
+              *ngIf="stone.position === 'left'"
+              [style.background-color]="stone.color"
+            >
+              {{ stone.weight }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="center-pole"></div>
+      <div class="scale-pan right">
+        <div class="stones-container">
+          <ng-container *ngFor="let stone of stones">
+            <div
+              class="stone"
+              *ngIf="stone.position === 'right'"
+              [style.background-color]="stone.color"
+            >
+              {{ stone.weight }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="scale-stand"></div>
+  </div>
+
+  <div class="stones-palette">
+    <ng-container *ngFor="let stone of stones">
+      <div
+        class="stone"
+        [style.background-color]="stone.color"
+        [class.selected]="stone.position !== 'none'"
+        (click)="
+          placeStone(
+            stone,
+            stone.position === 'none'
+              ? 'left'
+              : stone.position === 'left'
+              ? 'right'
+              : 'none'
+          )
+        "
+      >
+        {{ stone.weight }}
+      </div>
+    </ng-container>
+  </div>
+
+  <button class="reset-button" (click)="reset()">Reset Scale</button>
+</div>

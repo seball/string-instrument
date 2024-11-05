@@ -1,0 +1,29 @@
+<div class="sequence-builder">
+  <h3>Sequence Builder</h3>
+
+  <div class="sequence-display">
+    <div *ngFor="let step of sequence; let i = index" class="sequence-step">
+      <span class="step-notes">{{ getNoteNames(step.noteIndices) }}</span>
+      <button class="remove-btn" (click)="removeStep(i)">×</button>
+    </div>
+  </div>
+
+  <div class="builder-controls">
+    <div class="note-selector">
+      <div
+        *ngFor="let string of strings; let i = index"
+        class="note-option"
+        [class.selected]="selectedNotes.includes(i)"
+        (click)="toggleNoteSelection(i)"
+      >
+        {{ string.runicSymbol }}
+      </div>
+    </div>
+
+    <div class="button-controls">
+      <button class="btn" (click)="addToSequence()">Add to Sequence</button>
+      <button class="btn" (click)="clearSequence()">Clear</button>
+      <button class="btn" (click)="playSequence()">Play Sequence</button>
+    </div>
+  </div>
+</div>

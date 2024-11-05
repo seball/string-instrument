@@ -1,0 +1,29 @@
+<div class="practice-display">
+  <h3>Practice Mode</h3>
+
+  <div class="sequence-display">
+    <div
+      *ngFor="let note of sequence; let i = index"
+      class="sequence-note"
+      [class.completed]="i < currentStep"
+      [class.current]="i === currentStep"
+    >
+      {{ note }}
+    </div>
+  </div>
+
+  <div class="practice-controls">
+    <div *ngIf="isPlaying" class="progress">
+      Progress: {{ currentStep + 1 }} / {{ sequence.length }}
+    </div>
+    <button class="btn" (click)="isPlaying ? resetPractice() : startPractice()">
+      {{ isPlaying ? "Reset Practice" : "Start Practice" }}
+    </button>
+  </div>
+
+  <div class="instructions" *ngIf="isPlaying">
+    <p>
+      Current note to play: <strong>{{ sequence[currentStep] }}</strong>
+    </p>
+  </div>
+</div>
